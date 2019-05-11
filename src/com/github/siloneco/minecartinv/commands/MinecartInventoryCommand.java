@@ -23,6 +23,7 @@ public class MinecartInventoryCommand implements CommandExecutor {
 
 			if (!(sender instanceof Player)) {
 				sender.sendMessage(ChatColor.RED + "プレイヤーのみ実行可能です");
+				return true;
 			}
 
 			Player p = (Player) sender;
