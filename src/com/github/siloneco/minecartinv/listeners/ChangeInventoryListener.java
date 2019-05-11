@@ -9,7 +9,6 @@ import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 
 import com.github.siloneco.minecartinv.InventoryManager;
-import com.github.siloneco.minecartinv.MinecartInventory;
 
 public class ChangeInventoryListener implements Listener {
 
@@ -23,10 +22,6 @@ public class ChangeInventoryListener implements Listener {
 		}
 
 		Player p = (Player) e.getEntered();
-
-		if (MinecartInventory.getPluginConfig().disableWorlds.contains(e.getVehicle().getWorld().getName())) {
-			return;
-		}
 
 		if (!p.hasPermission("minecartinventory.switchinventory")) {
 			return;
@@ -45,10 +40,6 @@ public class ChangeInventoryListener implements Listener {
 		}
 
 		Player p = (Player) e.getExited();
-
-		if (MinecartInventory.getPluginConfig().disableWorlds.contains(e.getVehicle().getWorld().getName())) {
-			return;
-		}
 
 		if (!p.hasPermission("minecartinventory.switchinventory")) {
 			return;
