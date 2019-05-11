@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -21,6 +22,8 @@ public class PluginConfig {
 
 	@ConfigOptions(path = "Chat.Prefix", type = OptionType.CHAT_FORMAT)
 	public String chatPrefix = "&c[&6MinecartInv&c] ";
+	@ConfigOptions(path = "DisableWorlds")
+	public List<String> disableWorlds = Arrays.asList("ExampleWorld1", "ExampleWorld2", "ExampleWorld3");
 
 	public PluginConfig(MinecartInventory plugin) {
 		this.plugin = plugin;
@@ -177,6 +180,10 @@ public class PluginConfig {
 	}
 
 	public enum OptionType {
-		LOCATION, LOCATION_LIST, SOUND, CHAT_FORMAT, NONE
+		LOCATION,
+		LOCATION_LIST,
+		SOUND,
+		CHAT_FORMAT,
+		NONE
 	}
 }
