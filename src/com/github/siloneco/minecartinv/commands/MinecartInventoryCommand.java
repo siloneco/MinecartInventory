@@ -15,7 +15,8 @@ public class MinecartInventoryCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length <= 0) {
-			sender.sendMessage(ChatColor.RED + cmd.getUsage().replace("{LABEL}", label));
+			sender.sendMessage(MinecartInventory.getPluginConfig().chatPrefix + ChatColor.RED
+					+ cmd.getUsage().replace("{LABEL}", label));
 			return true;
 		}
 
@@ -32,7 +33,8 @@ public class MinecartInventoryCommand implements CommandExecutor {
 
 			p.sendMessage(MinecartInventory.getPluginConfig().chatPrefix + ChatColor.GREEN + "設定しました！");
 		} else {
-			sender.sendMessage(ChatColor.RED + cmd.getUsage().replace("{LABEL}", label));
+			sender.sendMessage(MinecartInventory.getPluginConfig().chatPrefix + ChatColor.RED
+					+ cmd.getUsage().replace("{LABEL}", label));
 		}
 		return true;
 	}
