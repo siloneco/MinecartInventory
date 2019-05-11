@@ -2,7 +2,7 @@
 
 ## 概要
 トロッコに乗った時に、そのプレイヤーのインベントリを設定されたインベントリに切り替えることができます  
-このPluginは [FulpigRecoveryServer](https://minecraft.jp/servers/5bcd99a4a9b0bd00d6008355) 用に作られたPluginです  
+このPluginは [FulpigRecoveryServer!](https://minecraft.jp/servers/5bcd99a4a9b0bd00d6008355) 用に作られたPluginです  
 
 ## コマンド
 * /minecartinventory (短縮: /mi) : インベントリを設定するコマンド。/mi setで現在のインベントリに設定できます
