@@ -11,3 +11,5 @@ commands:
 permissions:
   minecartinventory.command.minecartinventory:
     default: op
+  minecartinventory.switchinventory:
+    default: true

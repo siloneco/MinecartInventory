@@ -23,6 +23,10 @@ public class ChangeInventoryListener implements Listener {
 
 		Player p = (Player) e.getEntered();
 
+		if (!p.hasPermission("minecartinventory.switchinventory")) {
+			return;
+		}
+
 		InventoryManager.setInventory(p);
 	}
 
@@ -36,6 +40,10 @@ public class ChangeInventoryListener implements Listener {
 		}
 
 		Player p = (Player) e.getExited();
+
+		if (!p.hasPermission("minecartinventory.switchinventory")) {
+			return;
+		}
 
 		InventoryManager.returnInventory(p);
 	}
