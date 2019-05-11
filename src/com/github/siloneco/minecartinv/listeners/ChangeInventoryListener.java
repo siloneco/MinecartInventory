@@ -13,7 +13,7 @@ import com.github.siloneco.minecartinv.InventoryManager;
 public class ChangeInventoryListener implements Listener {
 
 	@EventHandler
-	public void onRideMinecard(VehicleEnterEvent e) {
+	public void onRideMinecart(VehicleEnterEvent e) {
 		if (!(e.getEntered() instanceof Player)) {
 			return;
 		}
@@ -31,7 +31,7 @@ public class ChangeInventoryListener implements Listener {
 	}
 
 	@EventHandler
-	public void onRideMinecard(VehicleExitEvent e) {
+	public void onExitMinecart(VehicleExitEvent e) {
 		if (!(e.getExited() instanceof Player)) {
 			return;
 		}
@@ -49,7 +49,7 @@ public class ChangeInventoryListener implements Listener {
 	}
 
 	@EventHandler
-	public void onQuitMinecard(PlayerQuitEvent e) {
+	public void onQuitMinecart(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		InventoryManager.returnInventory(p);
 	}
