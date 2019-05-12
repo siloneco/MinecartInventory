@@ -51,6 +51,9 @@ public class ChangeInventoryListener implements Listener {
 	@EventHandler
 	public void onQuitMinecart(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
-		InventoryManager.returnInventory(p);
+
+		if (p.getVehicle() != null && p.getVehicle() instanceof Minecart) {
+			InventoryManager.returnInventory(p);
+		}
 	}
 }
