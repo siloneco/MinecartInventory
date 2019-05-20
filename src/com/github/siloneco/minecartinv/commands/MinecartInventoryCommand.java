@@ -51,7 +51,7 @@ public class MinecartInventoryCommand implements CommandExecutor {
 
 			if (data.getKey().equals("default")) {
 				p.sendMessage(prefix + ChatColor.GREEN + "デフォルトのインベントリを保存しました！ "
-						+ ChatColor.GRAY + "(名前の付いていないトロッコに乗った時にこれが適用されます)");
+						+ ChatColor.GRAY + "(名前の付いていないEntityに乗った時にこれが適用されます)");
 			} else {
 				p.sendMessage(prefix + ChatColor.GREEN + "インベントリを "
 						+ ChatColor.YELLOW + data.getKey()
