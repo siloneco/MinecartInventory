@@ -19,7 +19,7 @@
 
 ## 権限
 | 権限 | 内容 | デフォルト値 |
-|:-----------|------------|------------:|
+|-----------|------------|------------|
 | minecartinventory.switchinventory | この権限を持っているプレイヤーのみトロッコに乗った時にインベントリを切り替えます | 全員 |
 | minecartinventory.command.minecartinventory | /minecartinventoryコマンドの権限 | OPのみ |
 | minecartinventory.changecartname | 名札でトロッコの名前を変更できる権限 | OPのみ |
