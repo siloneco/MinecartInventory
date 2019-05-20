@@ -22,12 +22,18 @@ public class ChangeInventoryListener implements Listener {
 		}
 
 		Player p = (Player) e.getEntered();
+		Minecart cart = (Minecart) e.getVehicle();
 
 		if (!p.hasPermission("minecartinventory.switchinventory")) {
 			return;
 		}
 
-		InventoryManager.setInventory(p);
+		String id = "default";
+		if (cart.getName() != null) {
+			id = cart.getName();
+		}
+
+		InventoryManager.setInventory(p, id);
 	}
 
 	@EventHandler

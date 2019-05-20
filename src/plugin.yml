@@ -2,14 +2,18 @@ name: MinecartInventory
 main: com.github.siloneco.minecartinv.MinecartInventory
 version: 1.0.3
 author: siloneco
-description: "Change inventory when player ride minecart"
+description: Change inventory when player ride minecart
 commands:
   minecartinventory:
-    usage: /{LABEL} set
     permission: minecartinventory.command.minecartinventory
-    aliases: ["mi"]
+    aliases:
+    - mi
 permissions:
   minecartinventory.command.minecartinventory:
+    default: op
+  minecartinventory.changecartname:
+    default: op
+  minecartinventory.checkname:
     default: op
   minecartinventory.switchinventory:
     default: true

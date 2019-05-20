@@ -16,15 +16,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class PluginConfig {
 
-	private MinecartInventory plugin;
-	private FileConfiguration conf;
+	private final MinecartInventory plugin;
+	private final FileConfiguration conf;
 
 	@ConfigOptions(path = "Chat.Prefix", type = OptionType.CHAT_FORMAT)
 	public String chatPrefix = "&c[&6MinecartInv&c] ";
 
 	public PluginConfig(MinecartInventory plugin) {
 		this.plugin = plugin;
-		this.conf = plugin.getConfig();
+		conf = plugin.getConfig();
 	}
 
 	public void additional() {
@@ -65,7 +65,7 @@ public class PluginConfig {
 						@SuppressWarnings("unchecked")
 						List<Location> locations = (List<Location>) field.get(this);
 
-						List<String> strs = new ArrayList<String>();
+						List<String> strs = new ArrayList<>();
 
 						if (!locations.isEmpty()) {
 
@@ -134,7 +134,7 @@ public class PluginConfig {
 
 						List<String> strList = conf.getStringList(path);
 
-						List<Location> locList = new ArrayList<Location>();
+						List<Location> locList = new ArrayList<>();
 
 						for (String str : strList) {
 
