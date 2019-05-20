@@ -1,6 +1,6 @@
 name: MinecartInventory
 main: com.github.siloneco.minecartinv.MinecartInventory
-version: 1.0.4
+version: 1.0.5
 author: siloneco
 description: Change inventory when player ride minecart
 commands:
