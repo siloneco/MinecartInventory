@@ -1,12 +1,12 @@
 package com.github.siloneco.minecartinv;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Minecart;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.siloneco.minecartinv.commands.MinecartInventoryCommand;
 import com.github.siloneco.minecartinv.listeners.ChangeInventoryListener;
 import com.github.siloneco.minecartinv.listeners.NameTagListener;
+import com.github.siloneco.minecartinv.tasks.CheckRideTask;
 
 public class MinecartInventory extends JavaPlugin {
 
@@ -23,17 +23,7 @@ public class MinecartInventory extends JavaPlugin {
 
 		InventoryManager.init();
 
-		Bukkit.getOnlinePlayers().forEach(p -> {
-			if (p.getVehicle() != null && p.getVehicle() instanceof Minecart) {
-				Minecart cart = (Minecart) p.getVehicle();
-
-				if (cart.getName() == null) {
-					InventoryManager.setInventory(p, "default");
-				} else {
-					InventoryManager.setInventory(p, cart.getName());
-				}
-			}
-		});
+		CheckRideTask.run();
 
 		Bukkit.getPluginCommand("minecartinventory").setExecutor(new MinecartInventoryCommand());
 
@@ -46,6 +36,7 @@ public class MinecartInventory extends JavaPlugin {
 	@Override
 	public void onDisable() {
 
+		CheckRideTask.stopTask();
 		InventoryManager.returnAll();
 
 		Bukkit.getLogger().info(getName() + " disabled.");

@@ -2,10 +2,13 @@ package com.github.siloneco.minecartinv;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -161,6 +164,10 @@ public class InventoryManager {
 		return dataList;
 	}
 
+	public static boolean isTargetEntity(Entity ent) {
+		return targetTypes.contains(ent.getType());
+	}
+
 	protected static void returnAll() {
 		for (Player p : playerInventoryMap.keySet()) {
 			InventoryData data = playerInventoryMap.get(p);
@@ -170,4 +177,11 @@ public class InventoryManager {
 			p.getInventory().setItemInOffHand(data.getOffHand());
 		}
 	}
+
+	private static List<EntityType> targetTypes = Arrays.asList(EntityType.ARROW, EntityType.BAT, EntityType.BLAZE,
+			EntityType.BOAT, EntityType.CHICKEN, EntityType.DRAGON_FIREBALL, EntityType.ENDER_DRAGON,
+			EntityType.ENDER_PEARL, EntityType.FALLING_BLOCK, EntityType.FIREBALL, EntityType.FIREWORK,
+			EntityType.FISHING_HOOK, EntityType.GHAST, EntityType.MINECART, EntityType.SMALL_FIREBALL,
+			EntityType.SNOWBALL, EntityType.SPECTRAL_ARROW, EntityType.THROWN_EXP_BOTTLE, EntityType.TIPPED_ARROW,
+			EntityType.WITHER, EntityType.WITHER_SKULL);
 }

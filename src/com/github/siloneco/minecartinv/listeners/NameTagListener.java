@@ -4,13 +4,15 @@ import java.util.HashMap;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.entity.Minecart;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.github.siloneco.minecartinv.InventoryManager;
 import com.github.siloneco.minecartinv.MinecartInventory;
 
 import net.md_5.bungee.api.ChatColor;
@@ -23,11 +25,11 @@ public class NameTagListener implements Listener {
 	public void onPlayerInteractMinecart(PlayerInteractAtEntityEvent e) {
 		Player p = e.getPlayer();
 
-		if (!(e.getRightClicked() instanceof Minecart)) {
+		if (!InventoryManager.isTargetEntity(e.getRightClicked())) {
 			return;
 		}
 
-		Minecart cart = (Minecart) e.getRightClicked();
+		Entity entity = e.getRightClicked();
 
 		if (!p.isSneaking() || !p.hasPermission("minecartinventory.changecartname")) {
 			return;
@@ -50,7 +52,7 @@ public class NameTagListener implements Listener {
 			return;
 		}
 
-		cart.setCustomName(id);
+		entity.setCustomName(id);
 		p.sendMessage(MinecartInventory.getPluginConfig().chatPrefix + ChatColor.GREEN + "名前を設定しました!");
 
 		coolTime.put(p, System.currentTimeMillis());
@@ -60,11 +62,11 @@ public class NameTagListener implements Listener {
 	public void checkMinecartName(PlayerInteractAtEntityEvent e) {
 		Player p = e.getPlayer();
 
-		if (!(e.getRightClicked() instanceof Minecart)) {
+		if (!InventoryManager.isTargetEntity(e.getRightClicked())) {
 			return;
 		}
 
-		Minecart cart = (Minecart) e.getRightClicked();
+		Entity entity = e.getRightClicked();
 
 		if (!p.isSneaking() || p.getGameMode() != GameMode.CREATIVE
 				|| !p.hasPermission("minecartinventory.checkname")) {
@@ -82,12 +84,28 @@ public class NameTagListener implements Listener {
 
 		String prefix = MinecartInventory.getPluginConfig().chatPrefix;
 
-		if (cart.getName().equalsIgnoreCase("entity.MinecartRideable.name")) {
+		if (entity.getName().equalsIgnoreCase("entity.MinecartRideable.name")) {
 			p.sendMessage(prefix + ChatColor.YELLOW + "名前は設定されていませんでした");
 		} else {
-			p.sendMessage(prefix + ChatColor.YELLOW + "名前: " + ChatColor.GREEN + cart.getName());
+			p.sendMessage(prefix + ChatColor.YELLOW + "名前: " + ChatColor.GREEN + entity.getName());
 		}
 
 		coolTime.put(p, System.currentTimeMillis());
+	}
+
+	@EventHandler
+	public void damage(EntityDamageByEntityEvent e) {
+		if (!(e.getDamager() instanceof Player)) {
+			return;
+		}
+
+		Player p = (Player) e.getDamager();
+		if (p.isSneaking()) {
+			return;
+		}
+
+		e.getEntity().setPassenger(p);
+
+		p.sendMessage(InventoryManager.isTargetEntity(e.getEntity()) + "");
 	}
 }
