@@ -29,7 +29,7 @@ public class ChangeInventoryListener implements Listener {
 		}
 
 		String id = "default";
-		if (cart.getName() != null) {
+		if (cart.getName().equals("entity.MinecartRideable.name")) {
 			id = cart.getName();
 		}
 
