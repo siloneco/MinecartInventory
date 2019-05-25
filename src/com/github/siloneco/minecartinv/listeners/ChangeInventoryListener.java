@@ -13,6 +13,10 @@ public class ChangeInventoryListener implements Listener {
 	public void onQuitMinecart(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 
+		if (p.getVehicle() == null) {
+			return;
+		}
+
 		if (InventoryManager.isTargetEntity(p.getVehicle())) {
 			InventoryManager.returnInventory(p);
 		}
