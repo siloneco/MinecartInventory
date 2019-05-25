@@ -8,7 +8,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -93,19 +92,19 @@ public class NameTagListener implements Listener {
 		coolTime.put(p, System.currentTimeMillis());
 	}
 
-	@EventHandler
-	public void damage(EntityDamageByEntityEvent e) {
-		if (!(e.getDamager() instanceof Player)) {
-			return;
-		}
-
-		Player p = (Player) e.getDamager();
-		if (p.isSneaking()) {
-			return;
-		}
-
-		e.getEntity().setPassenger(p);
-
-		p.sendMessage(InventoryManager.isTargetEntity(e.getEntity()) + "");
-	}
+//	@EventHandler
+//	public void damage(EntityDamageByEntityEvent e) {
+//		if (!(e.getDamager() instanceof Player)) {
+//			return;
+//		}
+//
+//		Player p = (Player) e.getDamager();
+//		if (p.isSneaking()) {
+//			return;
+//		}
+//
+//		e.getEntity().setPassenger(p);
+//
+//		p.sendMessage(InventoryManager.isTargetEntity(e.getEntity()) + "");
+//	}
 }
