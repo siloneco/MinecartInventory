@@ -5,56 +5,60 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.siloneco.minecartinv.commands.MinecartInventoryCommand;
 import com.github.siloneco.minecartinv.listeners.ChangeInventoryListener;
+import com.github.siloneco.minecartinv.listeners.DestroyVehicleListener;
 import com.github.siloneco.minecartinv.listeners.NameTagListener;
+import com.github.siloneco.minecartinv.listeners.NoDamageExplodeListener;
 import com.github.siloneco.minecartinv.tasks.CheckRideTask;
 
 public class MinecartInventory extends JavaPlugin {
 
-	private static MinecartInventory plugin;
-	private static PluginConfig config;
+    private static MinecartInventory plugin;
+    private static PluginConfig config;
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-		plugin = this;
+        plugin = this;
 
-		MinecartInventory.config = new PluginConfig(this);
-		MinecartInventory.config.loadConfig();
+        MinecartInventory.config = new PluginConfig(this);
+        MinecartInventory.config.loadConfig();
 
-		InventoryManager.init();
+        InventoryManager.init();
 
-		CheckRideTask.run();
+        CheckRideTask.run();
 
-		Bukkit.getPluginCommand("minecartinventory").setExecutor(new MinecartInventoryCommand());
+        Bukkit.getPluginCommand("minecartinventory").setExecutor(new MinecartInventoryCommand());
 
-		Bukkit.getPluginManager().registerEvents(new ChangeInventoryListener(), this);
-		Bukkit.getPluginManager().registerEvents(new NameTagListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ChangeInventoryListener(), this);
+        Bukkit.getPluginManager().registerEvents(new NameTagListener(), this);
+        Bukkit.getPluginManager().registerEvents(new DestroyVehicleListener(), this);
+        Bukkit.getPluginManager().registerEvents(new NoDamageExplodeListener(), this);
 
-		Bukkit.getLogger().info(getName() + " enabled.");
-	}
+        Bukkit.getLogger().info(getName() + " enabled.");
+    }
 
-	@Override
-	public void onDisable() {
+    @Override
+    public void onDisable() {
 
-		CheckRideTask.stopTask();
-		InventoryManager.returnAll();
+        CheckRideTask.stopTask();
+        InventoryManager.returnAll();
 
-		Bukkit.getLogger().info(getName() + " disabled.");
-	}
+        Bukkit.getLogger().info(getName() + " disabled.");
+    }
 
-	public void reloadPluginConfig() {
+    public void reloadPluginConfig() {
 
-		reloadConfig();
+        reloadConfig();
 
-		MinecartInventory.config = new PluginConfig(this);
-		MinecartInventory.config.loadConfig();
-	}
+        MinecartInventory.config = new PluginConfig(this);
+        MinecartInventory.config.loadConfig();
+    }
 
-	public static PluginConfig getPluginConfig() {
-		return config;
-	}
+    public static PluginConfig getPluginConfig() {
+        return config;
+    }
 
-	public static MinecartInventory getPlugin() {
-		return plugin;
-	}
+    public static MinecartInventory getPlugin() {
+        return plugin;
+    }
 }

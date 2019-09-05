@@ -15,50 +15,50 @@ import com.github.siloneco.minecartinv.MinecartInventory;
 
 public class CheckRideTask {
 
-	private static BukkitTask task = null;
-	private static List<Player> riding = new ArrayList<Player>();
+    private static BukkitTask task = null;
+    private static List<Player> riding = new ArrayList<Player>();
 
-	public static void run() {
-		task = new BukkitRunnable() {
-			public void run() {
-				Bukkit.getOnlinePlayers().forEach(p -> {
+    public static void run() {
+        task = new BukkitRunnable() {
+            public void run() {
+                Bukkit.getOnlinePlayers().forEach(p -> {
 
-					if (p.getVehicle() == null) {
-						if (riding.contains(p)) {
-							riding.remove(p);
-							InventoryManager.returnInventory(p);
-						}
-						return;
-					}
+                    if ( p.getVehicle() == null ) {
+                        if ( riding.contains(p) ) {
+                            riding.remove(p);
+                            InventoryManager.returnInventory(p);
+                        }
+                        return;
+                    }
 
-					if (riding.contains(p)) {
-						return;
-					}
+                    if ( riding.contains(p) ) {
+                        return;
+                    }
 
-					if (!p.hasPermission("minecartinventory.switchinventory")) {
-						return;
-					}
+                    if ( !p.hasPermission("minecartinventory.switchinventory") ) {
+                        return;
+                    }
 
-					Entity vehicle = p.getVehicle();
+                    Entity vehicle = p.getVehicle();
 
-					String id = "default";
-					if (vehicle.getCustomName() != null) {
-						id = vehicle.getCustomName();
-					}
+                    String id = "default";
+                    if ( vehicle.getCustomName() != null ) {
+                        id = vehicle.getCustomName();
+                    }
 
-					id = ChatColor.stripColor(id);
+                    id = ChatColor.stripColor(id);
 
-					InventoryManager.setInventory(p, id);
-					riding.add(p);
-				});
-			}
-		}.runTaskTimer(MinecartInventory.getPlugin(), 0, 1);
-	}
+                    InventoryManager.setInventory(p, id);
+                    riding.add(p);
+                });
+            }
+        }.runTaskTimer(MinecartInventory.getPlugin(), 0, 1);
+    }
 
-	public static void stopTask() {
-		if (task != null) {
-			task.cancel();
-			task = null;
-		}
-	}
+    public static void stopTask() {
+        if ( task != null ) {
+            task.cancel();
+            task = null;
+        }
+    }
 }
